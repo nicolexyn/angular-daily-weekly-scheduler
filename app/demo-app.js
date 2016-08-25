@@ -13,7 +13,7 @@ angular.module('demoApp', ['ngAnimate', 'weeklyScheduler', 'weeklySchedulerI18N'
 
       $scope.model = {
         locale: localeService.$locale.id,
-        options: {/*monoSchedule: true*/},
+        options: {month: 0, year: 2015, type: 'DAILY'},
         items: [{
           label: 'Item 1',
           editable: false,

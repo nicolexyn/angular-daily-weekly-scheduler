@@ -8,24 +8,50 @@ angular.module('weeklyScheduler')
       selector: '.schedule-area-container'
     };
 
+    var WEEKLY_SCHEDULER = 'WEEKLY';
+    var DAILY_SCHEDULER = 'DAILY';
+
     /**
      * Configure the scheduler.
      * @param schedules
      * @param options
      * @returns {{minDate: *, maxDate: *, nbWeeks: *}}
      */
+
+    function getDateByOptions(options) {
+      return timeService.getDate(null, options.month, options.year);
+    }
+
+    function getMinDate(schedules, options) {
+      var now = timeService.getDate();
+      if (!angular.isUndefined(options.month)) {
+        return getDateByOptions(options).startOf('month');
+      } else {
+        return (schedules ? schedules.reduce(function (minDate, slot) {
+          return timeService.compare(slot.start, 'isBefore', minDate);
+        }, now) : now).startOf('week')
+      }
+    }
+
+    function getMaxDate(schedules, options) {
+      var now = timeService.getDate();
+      if (!angular.isUndefined(options.month)) {
+        return getDateByOptions(options).endOf('month');
+      } else {
+        return (schedules ? schedules.reduce(function (maxDate, slot) {
+          return timeService.compare(slot.end, 'isAfter', maxDate);
+        }, now) : now).clone().add(1, 'year').endOf('week')
+      }
+    }
+
     function config(schedules, options) {
       var now = moment();
 
       // Calculate min date of all scheduled events
-      var minDate = (schedules ? schedules.reduce(function (minDate, slot) {
-        return timeService.compare(slot.start, 'isBefore', minDate);
-      }, now) : now).startOf('week');
+      var minDate = getMinDate(schedules, options);
 
       // Calculate max date of all scheduled events
-      var maxDate = (schedules ? schedules.reduce(function (maxDate, slot) {
-        return timeService.compare(slot.end, 'isAfter', maxDate);
-      }, now) : now).clone().add(1, 'year').endOf('week');
+      var maxDate = getMaxDate(schedules, options);
 
       // Calculate nb of weeks covered by minDate => maxDate
       var nbWeeks = timeService.weekDiff(minDate, maxDate);
@@ -64,6 +90,10 @@ angular.module('weeklyScheduler')
         // Get the schedule container element
         var el = element[0].querySelector(defaultOptions.selector);
 
+        scope.getScheduleType = function () {
+          return options.type ? options.type : WEEKLY_SCHEDULER;
+        };
+
         function onModelChange(items) {
           // Check items are present
           if (items) {
@@ -89,7 +119,7 @@ angular.module('weeklyScheduler')
             }, []), options);
 
             // Then resize schedule area knowing the number of weeks in scope
-            el.firstChild.style.width = schedulerCtrl.config.nbWeeks / 53 * 200 + '%';
+            el.firstChild.style.width = angular.isUndefined(options.month) ? schedulerCtrl.config.nbWeeks / 53 * 200 + '%' : '100%' ;
 
             // Finally, run the sub directives listeners
             schedulerCtrl.$modelChangeListeners.forEach(function (listener) {

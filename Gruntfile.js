@@ -169,6 +169,7 @@
               'angular-i18n/angular-locale_fr-fr.js',
               'angular-i18n/angular-locale_de-de.js',
               'angular-i18n/angular-locale_es-es.js',
+              'angular-i18n/angular-locale_pt-br.js',
               'angular-dynamic-locale/dist/tmhDynamicLocale.js',
               'moment/moment.js'],
             dest: '<%= yeoman.dist %>/vendor'
