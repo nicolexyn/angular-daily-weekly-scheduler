@@ -1,4 +1,4 @@
-angular.module('weeklyScheduler')
+angular.module('scheduler')
 
   .filter('byIndex', [function () {
     return function (input, index) {
@@ -12,11 +12,11 @@ angular.module('weeklyScheduler')
     };
   }])
 
-  .directive('multiSlider', ['weeklySchedulerTimeService', function (timeService) {
+  .directive('multiSlider', ['schedulerTimeService', function (timeService) {
     return {
       restrict: 'E',
-      require: '^weeklyScheduler',
-      templateUrl: 'ng-weekly-scheduler/views/multi-slider.html',
+      require: '^scheduler',
+      templateUrl: 'ng-scheduler/views/multi-slider.html',
       link: function (scope, element, attrs, schedulerCtrl) {
         var conf = schedulerCtrl.config;
 

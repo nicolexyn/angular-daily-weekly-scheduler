@@ -1,6 +1,6 @@
-angular.module('demoApp', ['ngAnimate', 'weeklyScheduler', 'weeklySchedulerI18N'])
+angular.module('demoApp', ['ngAnimate', 'scheduler', 'schedulerI18N'])
 
-  .config(['weeklySchedulerLocaleServiceProvider', function (localeServiceProvider) {
+  .config(['schedulerLocaleServiceProvider', function (localeServiceProvider) {
     localeServiceProvider.configure({
       doys: {'es-es': 4},
       lang: {'es-es': {month: 'Mes', weekNb: 'número de la semana', addNew: 'Añadir'}},
@@ -8,12 +8,12 @@ angular.module('demoApp', ['ngAnimate', 'weeklyScheduler', 'weeklySchedulerI18N'
     });
   }])
 
-  .controller('DemoController', ['$scope', '$timeout', 'weeklySchedulerLocaleService', '$log',
+  .controller('DemoController', ['$scope', '$timeout', 'schedulerLocaleService', '$log',
     function ($scope, $timeout, localeService, $log) {
 
       $scope.model = {
         locale: localeService.$locale.id,
-        options: {month: 0, year: 2015, type: 'DAILY'},
+        options: {month: 0, year: 2015, type: 'WEEKLY'},
         items: [{
           label: 'Item 1',
           editable: false,

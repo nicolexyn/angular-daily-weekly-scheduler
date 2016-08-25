@@ -1,10 +1,10 @@
-angular.module('weeklyScheduler')
+angular.module('scheduler')
 
-  .directive('weeklySlot', ['weeklySchedulerTimeService', function (timeService) {
+  .directive('weeklySlot', ['schedulerTimeService', function (timeService) {
     return {
       restrict: 'E',
-      require: ['^weeklyScheduler', 'ngModel'],
-      templateUrl: 'ng-weekly-scheduler/views/weekly-slot.html',
+      require: ['^scheduler', 'ngModel'],
+      templateUrl: 'ng-scheduler/views/weekly-slot.html',
       link: function (scope, element, attrs, ctrls) {
         var schedulerCtrl = ctrls[0], ngModelCtrl = ctrls[1];
         var conf = schedulerCtrl.config;
@@ -185,7 +185,7 @@ angular.module('weeklyScheduler')
           element.css(css);
         };
 
-        scope.$on('weeklySchedulerLocaleChanged', function () {
+        scope.$on('schedulerLocaleChanged', function () {
           // Simple change object reference so that ngModel triggers formatting & rendering
           scope.schedule = angular.copy(scope.schedule);
         });

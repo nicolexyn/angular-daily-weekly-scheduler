@@ -1,7 +1,7 @@
 /*global mouseScroll */
-angular.module('weeklyScheduler')
+angular.module('scheduler')
 
-  .directive('weeklyScheduler', ['$parse', 'weeklySchedulerTimeService', '$log', function ($parse, timeService, $log) {
+  .directive('scheduler', ['$parse', 'schedulerTimeService', '$log', function ($parse, timeService, $log) {
 
     var defaultOptions = {
       monoSchedule: false,
@@ -65,12 +65,12 @@ angular.module('weeklyScheduler')
 
     return {
       restrict: 'E',
-      require: 'weeklyScheduler',
+      require: 'scheduler',
       transclude: true,
-      templateUrl: 'ng-weekly-scheduler/views/weekly-scheduler.html',
+      templateUrl: 'ng-scheduler/views/weekly-scheduler.html',
       controller: ['$injector', function ($injector) {
         // Try to get the i18n service
-        var name = 'weeklySchedulerLocaleService';
+        var name = 'schedulerLocaleService';
         if ($injector.has(name)) {
           $log.info('The I18N service has successfully been initialized!');
           var localeService = $injector.get(name);
@@ -149,7 +149,7 @@ angular.module('weeklyScheduler')
           /**
            * Listen to $locale change (brought by external module weeklySchedulerI18N)
            */
-          scope.$on('weeklySchedulerLocaleChanged', function (e, labels) {
+          scope.$on('schedulerLocaleChanged', function (e, labels) {
             if (schedulerCtrl.config) {
               schedulerCtrl.config.labels = labels;
             }

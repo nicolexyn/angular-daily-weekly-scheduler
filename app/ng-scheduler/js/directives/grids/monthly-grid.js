@@ -1,6 +1,6 @@
 /*global GRID_TEMPLATE */
-angular.module('weeklyScheduler')
-  .directive('monthlyGrid', ['weeklySchedulerTimeService', function (timeService) {
+angular.module('scheduler')
+  .directive('monthlyGrid', ['schedulerTimeService', function (timeService) {
 
     function doGrid(element, attrs, model) {
       // Clean element
@@ -21,7 +21,7 @@ angular.module('weeklyScheduler')
 
     return {
       restrict: 'E',
-      require: '^weeklyScheduler',
+      require: '^scheduler',
       link: function (scope, element, attrs, schedulerCtrl) {
         schedulerCtrl.$modelChangeListeners.push(function (newModel) {
           doGrid(element, attrs, newModel);

@@ -1,4 +1,4 @@
-angular.module('weeklyScheduler')
+angular.module('scheduler')
   .directive('inject', [function () {
 
     return {

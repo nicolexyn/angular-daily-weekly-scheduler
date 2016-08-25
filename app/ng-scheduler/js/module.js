@@ -1,4 +1,4 @@
-angular.module('weeklyScheduler', ['ngWeeklySchedulerTemplates']);
+angular.module('scheduler', ['ngSchedulerTemplates']);
 
 /* jshint -W098 */
 var GRID_TEMPLATE = angular.element('<div class="grid-item"></div>');

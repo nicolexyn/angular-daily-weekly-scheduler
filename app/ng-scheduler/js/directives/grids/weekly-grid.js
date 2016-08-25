@@ -1,19 +1,22 @@
 /*global GRID_TEMPLATE */
-angular.module('weeklyScheduler')
-  .directive('dailyGrid', [function () {
+angular.module('scheduler')
+  .directive('weeklyGrid', [function () {
 
     function doGrid(element, attrs, model) {
-      var monthLength = moment().month(model.month).endOf('month').date();
-      var ticksize = 100 / monthLength;
+      var i;
+      // Calculate week width distribution
+      var tickcount = model.nbWeeks;
+      var ticksize = 100 / tickcount;
       var gridItemEl = GRID_TEMPLATE.css({width: ticksize + '%'});
+      var now = model.minDate.clone().startOf('week');
 
       // Clean element
       element.empty();
 
-      for (var i = 1; i <= monthLength; i++) {
+      for (i = 0; i < tickcount; i++) {
         var child = gridItemEl.clone();
         if (angular.isUndefined(attrs.noText)) {
-          child.text(i);
+          child.text(now.add(i && 1, 'week').week());
         }
         element.append(child);
       }
@@ -21,7 +24,7 @@ angular.module('weeklyScheduler')
 
     return {
       restrict: 'E',
-      require: '^weeklyScheduler',
+      require: '^scheduler',
       link: function (scope, element, attrs, schedulerCtrl) {
         if (schedulerCtrl.config) {
           doGrid(element, attrs, schedulerCtrl.config);

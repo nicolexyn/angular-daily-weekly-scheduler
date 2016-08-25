@@ -1,5 +1,5 @@
-angular.module('weeklyScheduler')
-  .service('weeklySchedulerTimeService', ['$filter', function ($filter) {
+angular.module('scheduler')
+  .service('schedulerTimeService', ['$filter', function ($filter) {
 
     var MONTH = 'month';
     var WEEK = 'week';

@@ -1,7 +1,7 @@
-angular.module('weeklySchedulerI18N', ['tmh.dynamicLocale']);
+angular.module('schedulerI18N', ['tmh.dynamicLocale']);
 
-angular.module('weeklySchedulerI18N')
-  .provider('weeklySchedulerLocaleService', ['tmhDynamicLocaleProvider', function (tmhDynamicLocaleProvider) {
+angular.module('schedulerI18N')
+  .provider('schedulerLocaleService', ['tmhDynamicLocaleProvider', function (tmhDynamicLocaleProvider) {
 
     var defaultConfig = {
       doys: {'de-de': 4, 'en-gb': 4, 'en-us': 6, 'fr-fr': 4, 'pt-br': 4},
@@ -55,7 +55,7 @@ angular.module('weeklySchedulerI18N')
       }
 
       $rootScope.$on('$localeChangeSuccess', function () {
-        $rootScope.$broadcast('weeklySchedulerLocaleChanged', getLang());
+        $rootScope.$broadcast('schedulerLocaleChanged', getLang());
       });
 
       return {
