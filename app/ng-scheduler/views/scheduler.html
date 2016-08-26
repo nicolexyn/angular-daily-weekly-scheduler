@@ -1,7 +1,7 @@
 <div class="labels">
   <div class="srow text-right">{{schedulerCtrl.config.labels.month || 'Month'}}</div>
-  <div ng-if="getScheduleType() === 'WEEKLY'" class="srow text-right">{{schedulerCtrl.config.labels.weekNb || 'Week number'}}</div>
-  <div ng-if="getScheduleType() === 'DAILY'" class="srow text-right">{{schedulerCtrl.config.labels.dayNb || 'Day number'}}</div>
+  <div ng-if="isWeeklyScheduler()" class="srow text-right">{{schedulerCtrl.config.labels.weekNb || 'Week number'}}</div>
+  <div ng-if="isDailyScheduler()" class="srow text-right">{{schedulerCtrl.config.labels.dayNb || 'Day number'}}</div>
   <div class="schedule-animate" ng-repeat="item in schedulerCtrl.items" inject></div>
 </div>
 
@@ -12,8 +12,8 @@
     </div>
 
     <div class="srow timestamps">
-      <weekly-grid ng-if="getScheduleType() === 'WEEKLY'" class="grid-container"></weekly-grid>
-      <daily-grid ng-if="getScheduleType() === 'DAILY'" class="grid-container"></daily-grid>
+      <weekly-grid ng-if="isWeeklyScheduler()" class="grid-container"></weekly-grid>
+      <daily-grid ng-if="isDailyScheduler()" class="grid-container"></daily-grid>
     </div>
 
     <div class="srow schedule-animate" ng-repeat="item in schedulerCtrl.items">

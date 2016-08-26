@@ -13,7 +13,15 @@ angular.module('demoApp', ['ngAnimate', 'scheduler', 'schedulerI18N'])
 
       $scope.model = {
         locale: localeService.$locale.id,
-        options: {month: 0, year: 2015, type: 'WEEKLY'},
+        options: {
+          month: 0,
+          year: 2015,
+          type: 'DAILY',
+          denyResize: true,
+          ignoreOverlaps: true,
+          denyDelete: true,
+          hideAllocationText: true
+        },
         items: [{
           label: 'Item 1',
           editable: false,

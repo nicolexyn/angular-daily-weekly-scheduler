@@ -1,15 +1,12 @@
 /*global mouseScroll */
 angular.module('scheduler')
 
-  .directive('scheduler', ['$parse', 'schedulerTimeService', '$log', function ($parse, timeService, $log) {
+  .directive('scheduler', ['$parse', 'schedulerTimeService', '$log', 'schedulerService', function ($parse, timeService, $log, schedulerService) {
 
     var defaultOptions = {
       monoSchedule: false,
       selector: '.schedule-area-container'
     };
-
-    var WEEKLY_SCHEDULER = 'WEEKLY';
-    var DAILY_SCHEDULER = 'DAILY';
 
     /**
      * Configure the scheduler.
@@ -45,8 +42,6 @@ angular.module('scheduler')
     }
 
     function config(schedules, options) {
-      var now = moment();
-
       // Calculate min date of all scheduled events
       var minDate = getMinDate(schedules, options);
 
@@ -56,7 +51,10 @@ angular.module('scheduler')
       // Calculate nb of weeks covered by minDate => maxDate
       var nbWeeks = timeService.weekDiff(minDate, maxDate);
 
-      var result = angular.extend(options, {minDate: minDate, maxDate: maxDate, nbWeeks: nbWeeks});
+      // Get the number of days of the selected month
+      var nbDays = schedulerService.isDailyScheduler(options) ? getDateByOptions(options).endOf('month').date() : 0;
+
+      var result = angular.extend(options, {minDate: minDate, maxDate: maxDate, nbWeeks: nbWeeks, nbDays: nbDays});
       // Log configuration
       $log.debug('Weekly Scheduler configuration:', result);
 
@@ -67,8 +65,8 @@ angular.module('scheduler')
       restrict: 'E',
       require: 'scheduler',
       transclude: true,
-      templateUrl: 'ng-scheduler/views/weekly-scheduler.html',
-      controller: ['$injector', function ($injector) {
+      templateUrl: 'ng-scheduler/views/scheduler.html',
+      controller: ['$injector', 'schedulerService', function ($injector, schedulerService) {
         // Try to get the i18n service
         var name = 'schedulerLocaleService';
         if ($injector.has(name)) {
@@ -81,6 +79,7 @@ angular.module('scheduler')
 
         // Will hang our model change listeners
         this.$modelChangeListeners = [];
+        this.schedulerService = schedulerService;
       }],
       controllerAs: 'schedulerCtrl',
       link: function (scope, element, attrs, schedulerCtrl) {
@@ -90,8 +89,12 @@ angular.module('scheduler')
         // Get the schedule container element
         var el = element[0].querySelector(defaultOptions.selector);
 
-        scope.getScheduleType = function () {
-          return options.type ? options.type : WEEKLY_SCHEDULER;
+        scope.isWeeklyScheduler = function() {
+          return schedulerCtrl.schedulerService.isWeeklyScheduler(options);
+        };
+
+        scope.isDailyScheduler = function() {
+          return schedulerCtrl.schedulerService.isDailyScheduler(options);
         };
 
         function onModelChange(items) {

@@ -1,10 +1,10 @@
 angular.module('scheduler')
 
-  .directive('weeklySlot', ['schedulerTimeService', function (timeService) {
+  .directive('weeklySlot', ['schedulerTimeService', '$filter', function (timeService, $filter) {
     return {
       restrict: 'E',
       require: ['^scheduler', 'ngModel'],
-      templateUrl: 'ng-scheduler/views/weekly-slot.html',
+      templateUrl: 'ng-scheduler/views/schedule-slot.html',
       link: function (scope, element, attrs, ctrls) {
         var schedulerCtrl = ctrls[0], ngModelCtrl = ctrls[1];
         var conf = schedulerCtrl.config;
@@ -12,6 +12,8 @@ angular.module('scheduler')
         var containerEl = element.parent();
         var resizeDirectionIsStart = true;
         var valuesOnDragStart = {start: scope.schedule.start, end: scope.schedule.end};
+
+        scope.config = conf;
 
         var pixelToVal = function (pixel) {
           var percent = pixel / containerEl[0].clientWidth;
@@ -47,6 +49,14 @@ angular.module('scheduler')
           });
         };
 
+        scope.getSlotText = function(schedule) {
+          var text = '';
+          if (!conf.hideAllocationText) {
+            text = $filter('date')(schedule.start) + ' - ' + $filter('date')(schedule.end);
+          }
+          return text;
+        };
+
         /**
          * Delete on right click on slot
          */
@@ -74,13 +84,17 @@ angular.module('scheduler')
 
         if (scope.item.editable !== false) {
           scope.startResizeStart = function () {
-            resizeDirectionIsStart = true;
-            scope.startDrag();
+            if (!conf.denyResize) {
+              resizeDirectionIsStart = true;
+              scope.startDrag();
+            }
           };
 
           scope.startResizeEnd = function () {
-            resizeDirectionIsStart = false;
-            scope.startDrag();
+            if (!conf.denyResize) {
+              resizeDirectionIsStart = false;
+              scope.startDrag();
+            }
           };
 
           scope.startDrag = function () {
@@ -103,7 +117,7 @@ angular.module('scheduler')
             element.removeClass('active');
             containerEl.removeClass('dragging');
 
-            mergeOverlaps();
+            !conf.ignoreOverlaps ? mergeOverlaps() : angular.noop();
             scope.$apply();
           };
 
@@ -153,7 +167,7 @@ angular.module('scheduler')
         }
 
         // on init, merge overlaps
-        mergeOverlaps(true);
+        !conf.ignoreOverlaps ? mergeOverlaps(true) : angular.noop();
 
         //// UI -> model ////////////////////////////////////
         ngModelCtrl.$parsers.push(function onUIChange(ui) {
