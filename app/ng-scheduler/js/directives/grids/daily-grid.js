@@ -5,7 +5,11 @@ angular.module('scheduler')
     function doGrid(element, attrs, model) {
       var monthLength = moment().month(model.month).endOf('month').date();
       var ticksize = 100 / monthLength;
-      var gridItemEl = GRID_TEMPLATE.css({width: ticksize + '%'});
+      var gridCss = {
+        width: ticksize + '%',
+        'border-right': '1px solid #ccc'
+      };
+      var gridItemEl = GRID_TEMPLATE.css(gridCss);
 
       // Clean element
       element.empty();

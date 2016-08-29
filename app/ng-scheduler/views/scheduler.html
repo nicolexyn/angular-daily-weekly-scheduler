@@ -17,7 +17,8 @@
     </div>
 
     <div class="srow schedule-animate" ng-repeat="item in schedulerCtrl.items">
-      <weekly-grid class="grid-container striped" no-text></weekly-grid>
+      <weekly-grid ng-if="isWeeklyScheduler()" class="grid-container striped" no-text></weekly-grid>
+      <daily-grid ng-if="isDailyScheduler()" class="grid-container striped" no-text></daily-grid>
       <multi-slider index="{{$index}}"></multi-slider>
     </div>
   </div>

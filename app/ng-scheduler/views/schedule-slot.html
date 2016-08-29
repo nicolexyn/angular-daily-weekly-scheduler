@@ -1,6 +1,6 @@
-<div title="{{schedule.start | date}} - {{schedule.end | date}}">
+<div title="{{schedule.start | date}} - {{schedule.end | date}}" data="{{schedule}}">
   <div ng-if="!config.denyResize" class="handle left" ondrag="resize" ondragstart="startResizeStart" ondragstop="endDrag" handle></div>
-  <div ondrag="drag" ondragstart="startDrag" ondragstop="endDrag" handle>{{getSlotText(schedule)}}</div>
+  <div ondrag="drag" ondragstart="startDrag" ondragstop="endDrag" handle>{{getSlotText(schedule)}} </div>
   <div ng-if="!config.denyResize" class="handle right" ondrag="resize" ondragstart="startResizeEnd" ondragstop="endDrag" handle></div>
   <div ng-if="!config.denyDelete" class="remove"><span class="glyphicon glyphicon-remove"></span></div>
 </div>

@@ -20,6 +20,8 @@ angular.module('scheduler')
       link: function (scope, element, attrs, schedulerCtrl) {
         var conf = schedulerCtrl.config;
 
+        scope.config = conf;
+
         // The default scheduler block size when adding a new item
         var defaultNewScheduleSize = parseInt(attrs.size) || 8;
         defaultNewScheduleSize = schedulerService.isDailyScheduler(conf) ? 1 : defaultNewScheduleSize;
@@ -57,6 +59,8 @@ angular.module('scheduler')
               item.schedules = [];
             }
             item.schedules.push({start: startDate.toDate(), end: endDate.toDate()});
+            var dateFormat = 'YYYY-MM-DD[T]HH:mm:ss';
+            conf.clickEvent ? conf.clickEvent({start: startDate.format(dateFormat), end: endDate.format(dateFormat)}) : angular.noop();
           });
         };
 

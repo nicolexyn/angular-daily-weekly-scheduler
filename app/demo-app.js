@@ -20,7 +20,10 @@ angular.module('demoApp', ['ngAnimate', 'scheduler', 'schedulerI18N'])
           denyResize: true,
           ignoreOverlaps: true,
           denyDelete: true,
-          hideAllocationText: true
+          hideAllocationText: true,
+          clickEvent: function (data) {
+            console.log(data);
+          }
         },
         items: [{
           label: 'Item 1',
