@@ -1,8 +1,8 @@
-<div class="slot ghost" ng-show="item.editable !== false && (!schedulerCtrl.config.monoSchedule || !item.schedules.length)">{{schedulerCtrl.config.labels.addNew || 'Add New'}}</div>
+<div class="slot ghost" ng-show="item.editable !== false && (!schedulerCtrl.config.monoSchedule || !item.schedules.length)">{{getSliderText()}}</div>
 
-<weekly-slot class="slot"
+<schedule-slot class="slot"
              ng-class="{disable: item.editable === false}"
              ng-repeat="schedule in item.schedules"
              ng-model="schedule"
              onclick="angular.element(this).scope().config.clickEvent(JSON.parse(this.firstElementChild.attributes.data.value))"
-             ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0 } }"></weekly-slot>
+             ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0 } }"></schedule-slot>

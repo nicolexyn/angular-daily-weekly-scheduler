@@ -4,6 +4,7 @@ angular.module('scheduler')
     var MONTH = 'month';
     var WEEK = 'week';
     var DAY = 'day';
+    var DAYS = 'days';
 
     return {
       const: {
@@ -39,6 +40,9 @@ angular.module('scheduler')
       },
       monthDiff: function (start, end) {
         return end.clone().endOf(MONTH).diff(start.clone().startOf(MONTH), MONTH) + 1;
+      },
+      dayDiff: function (start, end) {
+        return end.diff(start, DAYS);
       },
       monthDistribution: function (minDate, maxDate) {
         var i, result = [];

@@ -90,49 +90,49 @@ multi-slider.dragging .ghost {
   display: none;
 }
 
-multi-slider weekly-slot {
+multi-slider schedule-slot {
   -webkit-transition: background 0.1s ease-in;
   cursor: all-scroll;
   min-width: 10px !important;
   background: #4eb8d5;
 }
 
-multi-slider weekly-slot.disable {
+multi-slider schedule-slot.disable {
   cursor: not-allowed;
   color: #666;
   background: #c0c0c0;
 }
 
-multi-slider weekly-slot .handle {
+multi-slider schedule-slot .handle {
   position: absolute;
   top: 0;
   bottom: 0;
 }
 
-multi-slider weekly-slot .handle.left, multi-slider weekly-slot .handle.right {
+multi-slider schedule-slot .handle.left, multi-slider schedule-slot .handle.right {
   width: 10px;
   background: #000;
   cursor: col-resize;
   opacity: 0.1;
 }
 
-multi-slider weekly-slot.disable .handle {
+multi-slider schedule-slot.disable .handle {
   cursor: not-allowed;
 }
 
-multi-slider weekly-slot .handle.left:hover, multi-slider weekly-slot .handle.right:hover {
+multi-slider schedule-slot .handle.left:hover, multi-slider schedule-slot .handle.right:hover {
   opacity: 0.3;
 }
 
-multi-slider weekly-slot .handle.left {
+multi-slider schedule-slot .handle.left {
   left: 0;
 }
 
-multi-slider weekly-slot .handle.right {
+multi-slider schedule-slot .handle.right {
   right: 0;
 }
 
-multi-slider weekly-slot:not(.disable) .remove {
+multi-slider schedule-slot:not(.disable) .remove {
   display: none;
   cursor: pointer;
   float: right;
@@ -144,7 +144,7 @@ multi-slider weekly-slot:not(.disable) .remove {
   transform: translateY(-100%);
 }
 
-multi-slider weekly-slot:not(.disable) .remove:before {
+multi-slider schedule-slot:not(.disable) .remove:before {
   position: absolute;
   content: "";
   left: -5px;
@@ -152,15 +152,15 @@ multi-slider weekly-slot:not(.disable) .remove:before {
   height: 25px;
 }
 
-multi-slider weekly-slot:hover .remove {
+multi-slider schedule-slot:hover .remove {
   display: block;
 }
 
-multi-slider weekly-slot .remove:hover {
+multi-slider schedule-slot .remove:hover {
   opacity: 1;
 }
 
-multi-slider weekly-slot.active {
+multi-slider schedule-slot.active {
   z-index: 10;
   background: #5ab57a;
   color: #fff;

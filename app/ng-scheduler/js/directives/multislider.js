@@ -64,8 +64,17 @@ angular.module('scheduler')
           });
         };
 
+        scope.getSliderText = function () {
+          if (schedulerService.isDailyScheduler(conf)) {
+            return '+'
+          } else if (schedulerService.isWeeklyScheduler(conf)) {
+            return conf.labels.addNew || 'Add New'
+          }
+        };
+
         var hoverElement = angular.element(element.find('div')[0]);
         var hoverElementWidth = valToPixel(defaultNewScheduleSize);
+        schedulerService.isDailyScheduler(conf) ? hoverElementWidth -= 7 : angular.noop();
 
         hoverElement.css({
           width: hoverElementWidth + 'px'
@@ -73,9 +82,16 @@ angular.module('scheduler')
 
         element.on('mousemove', function (e) {
           var elOffX = element[0].getBoundingClientRect().left;
+          var blockSize = element[0].getBoundingClientRect().width / conf.nbDays;
 
+          var position = Math.floor(e.pageX/blockSize) * blockSize;
+
+          var hoverElmLeft = e.pageX - elOffX - hoverElementWidth / 2 + 'px';
+          if (schedulerService.isDailyScheduler(conf)) {
+            hoverElmLeft = position - elOffX - 4 + 'px';
+          }
           hoverElement.css({
-            left: e.pageX - elOffX - hoverElementWidth / 2 + 'px'
+            left: hoverElmLeft
           });
         });
 
@@ -83,9 +99,19 @@ angular.module('scheduler')
           if (!element.attr('no-add')) {
             var elOffX = element[0].getBoundingClientRect().left;
             var pixelOnClick = event.pageX - elOffX;
+
+            if (schedulerService.isDailyScheduler(conf)) {
+              var blockSize = element[0].getBoundingClientRect().width / conf.nbDays;
+              var hoverElementPos = Math.ceil(event.pageX / blockSize) * blockSize;
+              pixelOnClick = hoverElementPos  - elOffX
+            }
+
             var valOnClick = pixelToVal(pixelOnClick);
 
-            var start = Math.round(valOnClick - defaultNewScheduleSize / 2);
+            var start = valOnClick;
+            if (schedulerService.isWeeklyScheduler(conf)) {
+              start = Math.round(valOnClick - defaultNewScheduleSize / 2);
+            }
             var end = start + defaultNewScheduleSize;
 
             addSlot(start, end);
