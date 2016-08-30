@@ -1,8 +1,8 @@
 <div class="slot ghost" ng-show="item.editable !== false && (!schedulerCtrl.config.monoSchedule || !item.schedules.length)">{{getSliderText()}}</div>
 
-<schedule-slot class="slot"
+<schedule-slot ng-style="getSlotColor(schedule)" class="slot"
              ng-class="{disable: item.editable === false}"
              ng-repeat="schedule in item.schedules"
              ng-model="schedule"
-             onclick="angular.element(this).scope().config.clickEvent(JSON.parse(this.firstElementChild.attributes.data.value))"
+             onclick="angular.element(this).scope().parseScheduleData(this.firstElementChild.attributes.data.value)"
              ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0 } }"></schedule-slot>

@@ -21,15 +21,17 @@ angular.module('demoApp', ['ngAnimate', 'scheduler', 'schedulerI18N'])
           ignoreOverlaps: true,
           denyDelete: true,
           hideAllocationText: true,
+          defaultAllocationColor: '#B5180F',
           clickEvent: function (data) {
             console.log(data);
+            data.color = '#20B507';
           }
         },
         items: [{
           label: 'Item 1',
           editable: false,
           schedules: [
-            {start: moment('2015-12-27').toDate(), end: moment('2016-08-01').toDate()}
+            {start: moment('2015-01-10').toDate(), end: moment('2015-01-11').toDate(), color: "#b50098"}
           ]
         }]
       };

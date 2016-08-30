@@ -58,10 +58,29 @@ angular.module('scheduler')
             if (!item.schedules) {
               item.schedules = [];
             }
-            item.schedules.push({start: startDate.toDate(), end: endDate.toDate()});
-            var dateFormat = 'YYYY-MM-DD[T]HH:mm:ss';
-            conf.clickEvent ? conf.clickEvent({start: startDate.format(dateFormat), end: endDate.format(dateFormat)}) : angular.noop();
+            var schedule = {start: startDate.toDate(), end: endDate.toDate()};
+            item.schedules.push(schedule);
+            conf.clickEvent ? conf.clickEvent(schedule) : angular.noop();
           });
+        };
+
+        scope.getSlotColor = function (slot) {
+          if (slot.color || conf.defaultAllocationColor) {
+            return {"background-color": (slot.color || conf.defaultAllocationColor)}
+          }
+        };
+
+        scope.parseScheduleData = function (scheduleData) {
+          var schedule = JSON.parse(scheduleData);
+          if (schedule.start) {
+            schedule.start = new Date(schedule.start);
+          }
+
+          if (schedule.end) {
+            schedule.end = new Date(schedule.end);
+          }
+
+          conf.clickEvent ? conf.clickEvent(schedule) : angular.noop();
         };
 
         scope.getSliderText = function () {
