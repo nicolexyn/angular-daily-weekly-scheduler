@@ -1,10 +1,10 @@
 {
-  "name": "angular-weekly-scheduler",
-  "version": "0.0.5",
-  "description": "A scheduler using weeks for AngularJS",
-  "repository": "https://github.com/fmaturel/angular-weekly-scheduler",
+  "name": "angular-scheduler",
+  "version": "0.0.1",
+  "description": "A scheduler for AngularJS",
+  "repository": "https://github.com/AfferoLab-Flow/angular-weekly-scheduler",
   "license": "MIT",
-  "author": "François Maturel <francoismaturel@dijit.fr> (http://dijit.fr)",
+  "author": "AfferoLab",
   "dependencies": {
     "angular": "~1.4.0",
     "angular-animate": "~1.4.0",
