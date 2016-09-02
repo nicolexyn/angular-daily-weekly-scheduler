@@ -1,7 +1,7 @@
 {
   "name": "angular-scheduler",
   "appPath": "app",
-  "version": "0.0.2",
+  "version": "0.0.6",
   "description": "A scheduler for AngularJS",
   "homepage": "https://github.com/AfferoLab-Flow/angular-weekly-scheduler",
   "license": "MIT",
