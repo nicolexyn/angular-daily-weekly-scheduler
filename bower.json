@@ -1,12 +1,12 @@
 {
-  "name": "angular-weekly-scheduler",
+  "name": "angular-scheduler",
   "appPath": "app",
-  "version": "0.0.5",
-  "description": "A scheduler using weeks for AngularJS",
-  "homepage": "https://github.com/fmaturel/angular-weekly-scheduler",
+  "version": "0.0.1",
+  "description": "A scheduler for AngularJS",
+  "homepage": "https://github.com/AfferoLab-Flow/angular-weekly-scheduler",
   "license": "MIT",
   "main": [
-    "dist/js/ng-weekly-scheduler.js"
+    "dist/js/ng-scheduler.js"
   ],
   "ignore": [
     "**/.*",
