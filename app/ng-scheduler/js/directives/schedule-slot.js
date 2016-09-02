@@ -4,7 +4,7 @@ angular.module('scheduler')
     return {
       restrict: 'E',
       require: ['^scheduler', 'ngModel'],
-      templateUrl: 'ng-scheduler/views/schedule-slot.html',
+      templateUrl: '../bower_components/angular-daily-weekly-scheduler/app/ng-scheduler/views/schedule-slot.html',
       link: function (scope, element, attrs, ctrls) {
         var schedulerCtrl = ctrls[0], ngModelCtrl = ctrls[1];
         var conf = schedulerCtrl.config;

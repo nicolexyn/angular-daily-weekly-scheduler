@@ -16,7 +16,7 @@ angular.module('scheduler')
     return {
       restrict: 'E',
       require: '^scheduler',
-      templateUrl: 'ng-scheduler/views/multi-slider.html',
+      templateUrl: '../bower_components/angular-daily-weekly-scheduler/app/ng-scheduler/views/multi-slider.html',
       link: function (scope, element, attrs, schedulerCtrl) {
         var conf = schedulerCtrl.config;
 

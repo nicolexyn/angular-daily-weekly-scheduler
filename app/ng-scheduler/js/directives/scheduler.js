@@ -65,7 +65,7 @@ angular.module('scheduler')
       restrict: 'E',
       require: 'scheduler',
       transclude: true,
-      templateUrl: 'ng-scheduler/views/scheduler.html',
+      templateUrl: '../bower_components/angular-daily-weekly-scheduler/app/ng-scheduler/views/scheduler.html',
       controller: ['$injector', 'schedulerService', function ($injector, schedulerService) {
         // Try to get the i18n service
         var name = 'schedulerLocaleService';
