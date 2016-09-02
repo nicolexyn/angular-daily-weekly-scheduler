@@ -230,7 +230,7 @@ angular.module('scheduler')
     return {
       restrict: 'E',
       require: '^scheduler',
-      templateUrl: 'ng-scheduler/views/multi-slider.html',
+      templateUrl: '../bower_components/angular-daily-weekly-scheduler/app/ng-scheduler/views/multi-slider.html',
       link: function (scope, element, attrs, schedulerCtrl) {
         var conf = schedulerCtrl.config;
 
@@ -359,7 +359,7 @@ angular.module('scheduler')
     return {
       restrict: 'E',
       require: ['^scheduler', 'ngModel'],
-      templateUrl: 'ng-scheduler/views/schedule-slot.html',
+      templateUrl: '../bower_components/angular-daily-weekly-scheduler/app/ng-scheduler/views/schedule-slot.html',
       link: function (scope, element, attrs, ctrls) {
         var schedulerCtrl = ctrls[0], ngModelCtrl = ctrls[1];
         var conf = schedulerCtrl.config;
@@ -628,7 +628,7 @@ angular.module('scheduler')
       restrict: 'E',
       require: 'scheduler',
       transclude: true,
-      templateUrl: 'ng-scheduler/views/scheduler.html',
+      templateUrl: '../bower_components/angular-daily-weekly-scheduler/app/ng-scheduler/views/scheduler.html',
       controller: ['$injector', 'schedulerService', function ($injector, schedulerService) {
         // Try to get the i18n service
         var name = 'schedulerLocaleService';
