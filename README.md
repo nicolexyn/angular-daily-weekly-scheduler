@@ -1,5 +1,5 @@
-# angular-weekly-scheduler
-A weekly scheduler for angularjs
+# angular-scheduler
+A scheduler for angularjs
 
 [![Build Status](https://secure.travis-ci.org/fmaturel/angular-weekly-scheduler.svg)](http:/travis-ci.org/fmaturel/angular-weekly-scheduler)
 
