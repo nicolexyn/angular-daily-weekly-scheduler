@@ -1,10 +1,10 @@
 {
-  "name": "angular-scheduler",
+  "name": "angular-daily-weekly-scheduler",
   "version": "0.0.1",
   "description": "A scheduler for AngularJS",
-  "repository": "https://github.com/AfferoLab-Flow/angular-weekly-scheduler",
+  "repository": "https://github.com/nicolexyn/angular-daily-weekly-scheduler",
   "license": "MIT",
-  "author": "AfferoLab",
+  "author": "nicolexyn",
   "dependencies": {
     "angular": "~1.4.0",
     "angular-animate": "~1.4.0",
